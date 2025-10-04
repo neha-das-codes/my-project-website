@@ -58,16 +58,13 @@ export default function Register() {
       area: locationData.area || prev.area
     }));
   };
-
-  const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
     setErr(""); 
     setLoading(true);
-
     try {
       const res = await createUserWithEmailAndPassword(auth, form.email, form.password);
       const uid = res.user.uid;
-
       const userDoc = {
         uid,
         name: form.name,
@@ -76,7 +73,6 @@ export default function Register() {
         createdAt: serverTimestamp(),
         verified: role === "tutor" ? false : true
       };
-
       if (role === "tutor") {
         userDoc.phone = form.phone || "";
         userDoc.city = location.city || form.city || "";
@@ -91,7 +87,6 @@ export default function Register() {
         userDoc.availability = form.availability || [];
         userDoc.rating = 0;
         userDoc.ratingCount = 0
-
         if (location.lat && location.lng) {
           userDoc.lat = location.lat;
           userDoc.lng = location.lng;
@@ -106,7 +101,6 @@ export default function Register() {
           }
         }
       }
-
       await setDoc(doc(db, "users", uid), userDoc);
        if (role === "tutor") {
         await sendTutorRegistrationNotification({
@@ -125,8 +119,7 @@ export default function Register() {
       } else if (role === "tutor") {
         await sendTutorRegisterEmail({ name: form.name, email: form.email });
       }
-
-      navigate("/dashboard");
+       navigate("/dashboard");
     } catch (error) {
       setErr(error.message);
     } finally {

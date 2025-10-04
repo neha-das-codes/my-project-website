@@ -17,12 +17,10 @@ export default function SearchFilters({ onFilterChange, initial = {} }) {
     radius: 10, // Default 10km radius
     ...initial,
   });
-
-  const handleChange = (e) => {
+const handleChange = (e) => {
     setFilters((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
-
-  const handleSubjectChange = (e) => {
+const handleSubjectChange = (e) => {
     const { value, checked } = e.target;
     setFilters(prev => {
       const subjects = new Set(prev.subjects);
@@ -34,8 +32,7 @@ export default function SearchFilters({ onFilterChange, initial = {} }) {
       return { ...prev, subjects: [...subjects] };
     });
   };
-
-  const handleLocationSelect = (locationData) => {
+ const handleLocationSelect = (locationData) => {
     setFilters(prev => ({
       ...prev,
       locationText: locationData.address,
@@ -47,13 +44,11 @@ export default function SearchFilters({ onFilterChange, initial = {} }) {
   };
 const handleSubmit = (e) => {
   e.preventDefault();
-  
   // Validate required fields
   if (!filters.classes || !filters.board || !filters.locationText) {
     alert("⚠️ Please fill all required fields:\n\n• Class/Grade\n• Board\n• Location\n\nThese fields are mandatory to search for tutors.");
     return;
   }
-  
   // All validation passed, proceed with search
   onFilterChange(filters);
 };
@@ -67,7 +62,6 @@ const handleSubmit = (e) => {
         </div>
         Find Your Perfect Tutor
       </h2>
-
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Academic Details Section */}
         <div>
