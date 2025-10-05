@@ -21,9 +21,7 @@ const storage = getStorage(app);
 const googleProvider = new GoogleAuthProvider();
 googleProvider.addScope('email');
 googleProvider.addScope('profile');
-googleProvider.setCustomParameters({
-  prompt: 'select_account'
-});
+googleProvider.setCustomParameters({prompt: 'select_account'});
 
 // Function to link email/password to existing Google account
 export const linkEmailPassword = async (email, password) => {

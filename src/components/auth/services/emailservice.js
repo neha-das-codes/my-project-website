@@ -16,7 +16,6 @@ async function sendGenericEmail({ to_email, to_name, subject, message_html }) {
     console.warn("EmailJS env vars missing. Email not sent.");
     return;
   }
-
   const templateParams = {
     to_name,
     to_email,
@@ -26,7 +25,6 @@ async function sendGenericEmail({ to_email, to_name, subject, message_html }) {
     from_email: ADMIN_EMAIL,
     reply_to: ADMIN_EMAIL,
   };
-
   console.log('Email template params:', templateParams); // 🔍 Debug log
   return emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
 }

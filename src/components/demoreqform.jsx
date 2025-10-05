@@ -29,8 +29,7 @@ export default function DemoRequestForm({ tutor, onClose }) {
   const handleLocationSelect = (locationData) => {
     setLocation(locationData);
   };
-
-  const submit = async (e) => {
+ const submit = async (e) => {
     e.preventDefault();
     if (!auth.currentUser) {
       navigate("/signin");
@@ -55,8 +54,7 @@ export default function DemoRequestForm({ tutor, onClose }) {
         status: "pending",
         createdAt: serverTimestamp(),
       };
-
-      // Add location data only for home tuition
+// Add location data only for home tuition
       if (mode === "home" && location.address) {
         demoData.studentLocation = {
           address: location.address,
@@ -66,10 +64,8 @@ export default function DemoRequestForm({ tutor, onClose }) {
           lng: location.lng
         };
       }
-
-      await addDoc(collection(db, "demoRequests"), demoData);
-
-      // Send emails to both tutor and student
+     await addDoc(collection(db, "demoRequests"), demoData);
+     // Send emails to both tutor and student
       await sendDemoRequestEmails({
         studentName,
         studentEmail: email,
@@ -83,8 +79,7 @@ export default function DemoRequestForm({ tutor, onClose }) {
         note,
         studentLocation: mode === "home" ? location.address : null
       });
-
-      alert("Demo request sent successfully! You will receive a confirmation email shortly.");
+    alert("Demo request sent successfully! You will receive a confirmation email shortly.");
       onClose();
     } catch (error) {
       console.error("Error submitting demo request:", error);

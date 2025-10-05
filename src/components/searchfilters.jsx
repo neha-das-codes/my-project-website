@@ -33,8 +33,7 @@ const handleSubjectChange = (e) => {
     });
   };
  const handleLocationSelect = (locationData) => {
-    setFilters(prev => ({
-      ...prev,
+    setFilters(prev => ({...prev,
       locationText: locationData.address,
       city: locationData.city,
       area: locationData.area,
@@ -44,13 +43,10 @@ const handleSubjectChange = (e) => {
   };
 const handleSubmit = (e) => {
   e.preventDefault();
-  // Validate required fields
-  if (!filters.classes || !filters.board || !filters.locationText) {
-    alert("⚠️ Please fill all required fields:\n\n• Class/Grade\n• Board\n• Location\n\nThese fields are mandatory to search for tutors.");
-    return;
-  }
-  // All validation passed, proceed with search
-  onFilterChange(filters);
+  if (!filters.classes || !filters.board || !filters.locationText) // Validate required fields
+  {alert("⚠️ Please fill all required fields:\n\n• Class/Grade\n• Board\n• Location\n\nThese fields are mandatory to search for tutors.");
+    return;}
+  onFilterChange(filters);  // All validation passed, proceed with search
 };
  return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
